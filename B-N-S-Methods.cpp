@@ -122,7 +122,9 @@ pair<float, int> Hybrid(float (*f)(float), float (*derF)(float), float a, float 
 // Define the function f(x) = x^3 - x - 1 // f(x) = 3x^3 + 5x^2 - 7
 float f(float x)
 {
-    ifstream inputFile("fun1.pol");
+    //ifstream inputFile("fun1.pol");         // Exercise 4
+    //ifstream inputFile("fun2.pol");         // Exercise 1
+    ifstream inputFile("fun3.pol");         // Exercise 2
     int n;
     float result;
     vector<float> a(4);
@@ -148,22 +150,29 @@ float f(float x)
 // Differentiated Function.
 float derF(float x)
 {
-    return 9 * pow(x, 2) + 10 * pow(x, 1);
-    // return 2 * pow(x, 2) + 4 * pow(x, 1) + 10;
+    //return 9 * pow(x, 2) + 10 * pow(x, 1);              // Func1
+    // return 3 * pow(x, 2) + 3;                           // Func2
+    return 9 * pow(x, 2) + 4 * pow(x, 1) + 10;       // Func3
 }
 
 int main()
 {
-    float a = 0.0;
-    float b = 1.0;
+    /*
+    float a = 0.0;                          // For Func1, 2
+    float b = 1.0;                          // For Func1, 2
+    */
+    float a = 1.0;                          // For Func3
+    float b = 2.0;                          // For Func3
+
     int maxIter = 10000;                    // maximum number of iterations
     float eps = 1e-6;                       // tolerance for convergence
     float delta = 1e-6;                     // tolerance for small slope
+
     pair<float, int> root_by_bisection = Bisection(f, a, b, maxIter, eps);
     pair<float, int> root_by_newton = Newton(f, derF, b, maxIter, eps, delta);
     pair<float, int> root_by_secant = Secant(f, a, b, maxIter, eps);
     pair<float, int> root_by_hybrid = Hybrid(f, derF, a, b, maxIter, eps, delta);
-    cout << "Solutions are being saved in \"solution.sol\" file!!"  << endl;
+    cout << "\nSolutions are being saved in \"solution.sol\" file!!"  << endl;
     ofstream outputFile;
     outputFile.open("solution.sol");
     outputFile << "Method\t\tRoot\t\t\t\t\t\tIterations\t\tOutcome" << endl;
