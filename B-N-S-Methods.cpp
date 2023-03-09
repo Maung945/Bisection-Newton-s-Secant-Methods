@@ -148,17 +148,17 @@ float f(float x)
 // Differentiated Function.
 float derF(float x)
 {
-    // return 9 * pow(x, 2) + 10 * pow(x, 1);
-    return 2 * pow(x, 2) + 4 * pow(x, 1) + 10;
+    return 9 * pow(x, 2) + 10 * pow(x, 1);
+    // return 2 * pow(x, 2) + 4 * pow(x, 1) + 10;
 }
 
 int main()
 {
-    float a = 2.0;
+    float a = 0.0;
     float b = 1.0;
-    int maxIter = 10000;            // maximum number of iterations
-    float eps = 1e-6;               // tolerance for convergence
-    float delta = 1e-6;             // tolerance for small slope
+    int maxIter = 10000;                    // maximum number of iterations
+    float eps = 1e-6;                       // tolerance for convergence
+    float delta = 1e-6;                     // tolerance for small slope
     pair<float, int> root_by_bisection = Bisection(f, a, b, maxIter, eps);
     pair<float, int> root_by_newton = Newton(f, derF, b, maxIter, eps, delta);
     pair<float, int> root_by_secant = Secant(f, a, b, maxIter, eps);
